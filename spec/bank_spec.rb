@@ -16,7 +16,7 @@ RSpec.describe Bank do
     it 'calls client.credit' do
       amount = 10
       bank = Bank.new(client)
-      allow(client).to receive(:credit).with(amount) { "Updates credit score" }
+      allow(client).to receive(:update_credit).with(amount) { "Updates credit score" }
       expect(bank.deposit(amount)).to eq("Updates credit score")
     end
   end
@@ -27,7 +27,7 @@ RSpec.describe Bank do
     it 'calls client.debit' do
       amount = 10
       bank = Bank.new(client)
-      allow(client).to receive(:debit).with(amount) { "Updates debit score" }
+      allow(client).to receive(:update_debit).with(amount) { "Updates debit score" }
       expect(bank.withdraw(amount)).to eq("Updates debit score")
     end
   end

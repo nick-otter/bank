@@ -11,11 +11,11 @@ class Bank
   end
 
   def deposit(amount)
-    @client.credit(amount)
+    @client.update_credit(amount)
   end
 
   def withdraw(amount)
-    @client.debit(amount)
+    @client.update_debit(amount)
   end
 
   def print_statement
