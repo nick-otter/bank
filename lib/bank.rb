@@ -17,4 +17,8 @@ class Bank
   def withdraw(amount)
     @client.debit(amount)
   end
+
+  def print_statement
+    @formatter.print_statement
+  end
 end

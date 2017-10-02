@@ -31,4 +31,16 @@ RSpec.describe Bank do
       expect(bank.withdraw(amount)).to eq("Updates debit score")
     end
   end
+
+  context '#print_statement' do
+    let(:formatter) { double :Formatter }
+    let(:client) { double :Client }
+
+    it 'calls formatter.print_statement' do
+      bank = Bank.new(client, formatter)
+      allow(formatter).to receive(:print_statement) { "Client Statement" }
+      expect(bank.print_statement).to eq("Client Statement")
+    end
+  end
+
 end
