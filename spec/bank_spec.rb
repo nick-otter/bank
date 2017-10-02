@@ -11,19 +11,24 @@ RSpec.describe Bank do
   end
 
   context '#deposit' do
-    it 'takes an argument' do
-      client_deposit_amount = 10
-      expect(subject).to receive(:deposit).with(client_deposit_amount)
-      subject.deposit(client_deposit_amount)
+    let(:client) { double :Client }
+
+    it 'calls client.credit' do
+      amount = 10
+      bank = Bank.new(client)
+      allow(client).to receive(:credit).with(amount) { "Updates credit score" }
+      expect(bank.deposit(amount)).to eq("Updates credit score")
     end
   end
 
   context '#withdraw' do
-    it 'takes an argument' do
-      client_withdraw_amount = 5
-      expect(subject).to receive(:withdraw).with(client_withdraw_amount)
-      subject.withdraw(client_withdraw_amount)
+    let(:client) { double :Client }
+
+    it 'calls client.debit' do
+      amount = 10
+      bank = Bank.new(client)
+      allow(client).to receive(:debit).with(amount) { "Updates debit score" }
+      expect(bank.withdraw(amount)).to eq("Updates debit score")
     end
   end
-
 end
