@@ -1,12 +1,12 @@
-DATE = 14/01/2012
-DEFAULT_BALANCE = 0
+DATE = "14/01/2012"
+# DEFAULT_BALANCE = 0
 
 # This class stores all bank account information for the client
-class Client
+class Account
   attr_reader :balance, :date, :debit, :credit
 
   def initialize
-    @balance = [DEFAULT_BALANCE]
+    @balance = []
     @date = []
     @debit = []
     @credit = []
@@ -14,14 +14,14 @@ class Client
 
   def update_credit(amount)
     @credit.push(amount)
-    @debit.push(0)
+    @debit.push(" ")
     @date.push(DATE)
     credits_balance(amount)
   end
 
   def update_debit(amount)
     @debit.push(amount)
-    @credit.push(0)
+    @credit.push(" ")
     @date.push(DATE)
     debits_balance(amount)
   end
@@ -29,10 +29,18 @@ class Client
   private
 
   def credits_balance(amount)
-    @balance.push(@balance.last + amount)
+    if @balance.length == 0
+      @balance.push(amount)
+    else
+      @balance.push((@balance.last) + amount)
+    end
   end
 
   def debits_balance(amount)
-    @balance.push(@balance.last - amount)
+    if @balance.length == 0
+      @balance.push(0 - amount)
+    else
+      @balance.push((@balance.last) - amount)
+    end
   end
 end

@@ -3,42 +3,39 @@ require 'bank'
 RSpec.describe Bank do
   context '#init' do
     it 'initializes with a new instance of Client' do
-      expect(subject.client).to be_an_instance_of(Client)
-    end
-    it 'initializes with a new instance of Formatter' do
-      expect(subject.formatter).to be_an_instance_of(Formatter)
+      expect(subject.account).to be_an_instance_of(Account)
     end
   end
 
   context '#deposit' do
-    let(:client) { double :Client }
+    let(:account) { double :Account }
 
     it 'calls client.credit' do
       amount = 10
-      bank = Bank.new(client)
-      allow(client).to receive(:update_credit).with(amount) { "Updates credit score" }
+      bank = Bank.new(account)
+      allow(account).to receive(:update_credit).with(amount) { "Updates credit score" }
       expect(bank.deposit(amount)).to eq("Updates credit score")
     end
   end
 
   context '#withdraw' do
-    let(:client) { double :Client }
+    let(:account) { double :Account }
 
     it 'calls client.debit' do
       amount = 10
-      bank = Bank.new(client)
-      allow(client).to receive(:update_debit).with(amount) { "Updates debit score" }
+      bank = Bank.new(account)
+      allow(account).to receive(:update_debit).with(amount) { "Updates debit score" }
       expect(bank.withdraw(amount)).to eq("Updates debit score")
     end
   end
 
   context '#print_statement' do
-    let(:formatter) { double :Formatter }
-    let(:client) { double :Client }
+    let(:account) { double :Account }
+    let(:statement) { double :Statement }
 
-    it 'calls formatter.print_statement' do
-      bank = Bank.new(client, formatter)
-      allow(formatter).to receive(:print_statement) { "Client Statement" }
+    it 'calls statement.print_statement' do
+      bank = Bank.new(account)
+      allow(statement).to receive(:print_statement) { "Client Statement" }
       expect(bank.print_statement).to eq("Client Statement")
     end
   end

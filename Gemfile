@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.4.1'
 
 group :linters do
+  gem 'flog'
   gem 'rubocop'
 end
 
